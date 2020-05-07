@@ -14,7 +14,7 @@ Contributions to this repository are subject to the terms of the [IPR Mode](http
 
 ## Licensing
 
-Please see the [LICENSE](https://github.com/oasis-tcs/docbook-templates/blob/master/LICENSE.md) file for description of the license terms and OASIS policies applicable to the work in this GitHub project. 
+Please see the [LICENSE](https://github.com/oasis-ed-resc/docbook-templates/blob/master/LICENSE.md) file for description of the license terms and OASIS policies applicable to the work in this GitHub project. 
 
 ## Contact
 
