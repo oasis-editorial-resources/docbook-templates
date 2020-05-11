@@ -14,7 +14,7 @@ Contributions to this repository are subject to the terms of the [IPR Mode](http
 
 ## Licensing
 
-Please see the [LICENSE](https://github.com/editorial-resources-admin/docbook-templates/blob/master/LICENSE.md) file for description of the license terms and OASIS policies applicable to the work in this GitHub project. 
+Please see the [LICENSE](https://github.com/oasis-editorial-resources/docbook-templates/blob/master/LICENSE.md) file for description of the license terms and OASIS policies applicable to the work in this GitHub project. 
 
 ## Contact
 
