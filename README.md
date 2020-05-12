@@ -36,7 +36,7 @@ Choose this when it is not acceptable to embed in your committee document enviro
 Begin the XML document with a processing instruction used to invoke the stylesheet when browsing the XML: 
 - for an OASIS Committee Note:
 <pre>&lt;?xml-stylesheet type="text/xsl" 
-href="https://raw.githubusercontent.com/editorial-resources-admin/docbook-templates/master/2018/stylesheets/oasis-note-html.xsl"?></pre>
+href="https://raw.githubusercontent.com/editorial-resources-admin/docbook-templates/master/20xx/stylesheets/oasis-note-html.xsl"?></pre>
 
 - for an OASIS Standard:
 <pre>&lt;?xml-stylesheet type="text/xsl"
