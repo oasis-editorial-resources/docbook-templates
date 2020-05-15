@@ -1,3 +1,3 @@
-DP0=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+DP0=$(dirname "$0")
 
-java -jar $DP0/xjparse.jar -v -c $DP0/../catalog.xml $1
+java -jar $DP0/xjparse.jar -v -c $DP0/../models/catalog.xml $1

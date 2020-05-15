@@ -1,1 +1,1 @@
-call validate.bat ..\oasis-specification-0.8-wd08.xml
+call validate.bat ..\2018\oasis-specification-2018.xml

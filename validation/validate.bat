@@ -15,7 +15,7 @@ if %errorReturn% neq 0 goto :error
 echo No DTD validation errors.
 
 echo ============ Phase 2: Writing rules validation ============
-call "%~dp0xslt2.bat" "%~1" "%~dp0\..\oasis-spec-note.xsl" nul 2>output.txt
+call "%~dp0xslt2.bat" "%~1" "%~dp0\oasis-spec-note.xsl" nul 2>output.txt
 set errorReturn=%errorLevel%
 if %errorReturn% neq 0 goto :error
 echo No writing rule validation errors.
