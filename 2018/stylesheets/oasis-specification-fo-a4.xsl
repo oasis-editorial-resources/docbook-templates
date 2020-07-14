@@ -46,8 +46,7 @@
 <xsl:param name="body.start.indent" select="'0pt'"/>
 <xsl:param name="linenumbering.extension" select="'1'"/>
 <xsl:param name="body.font.family" select="'Arial,Helvetica,sans-serif'"/>
-<xsl:param name="body.fontset" select="'Arial,Helvetica,sans-serif'"/>
-<xsl:param name="title.fontset" select="'Arial,Helvetica,sans-serif'"/>
+<xsl:param name="title.font.family" select="'Arial,Helvetica,sans-serif'"/>
 <xsl:param name="toc.section.depth">3</xsl:param>
 <xsl:param name="variablelist.as.blocks">1</xsl:param>
 <xsl:param name="footer.rule">0</xsl:param>
