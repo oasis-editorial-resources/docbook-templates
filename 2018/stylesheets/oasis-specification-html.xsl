@@ -129,6 +129,10 @@
 <!-- ============================================================ -->
 <!-- HTML META -->
 
+<xsl:template name="user.head.content.extension">
+  <!--override this with additional user-defined head content-->
+</xsl:template>
+
 <xsl:template name="user.head.content">
   <xsl:param name="node" select="."/>
   <xsl:if test="$oasis-base='yes'">
@@ -141,6 +145,7 @@
   <xsl:apply-templates select="/*/articleinfo/releaseinfo[@role='cvs']"
                        mode="head.meta.content"/>
   <xsl:call-template name="oasis.head.mathml"/>
+  <xsl:call-template name="user.head.content.extension"/>
 </xsl:template>
 
 <xsl:template match="releaseinfo" mode="head.meta.content">
