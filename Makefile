@@ -1,4 +1,4 @@
-default: clean authoring publishing
+default: clean authoring publishing package
 
 clean:
 	@rm -rf target
@@ -7,15 +7,19 @@ authoring:
 	@mkdir -p target
 	@rsync -a src/common/ target/authoring
 	@rsync -a src/authoring/ target/authoring
-	@cd target/authoring && tar -cf ../authoring.tar *
-	@gzip -9 target/authoring.tar
 
 publishing:
 	@mkdir -p target
 	@rsync -a src/common/ target/publishing
 	@rsync -a src/publishing/ target/publishing
-	@cd target/publishing && tar -cf ../publishing.tar *
-	@gzip -9 target/publishing.tar
+
+package:
+	@cd target/authoring && tar -czf ../authoring.tar.gz *
+	@cd target/authoring && zip -q9r ../authoring.zip *
+
+	@cd target/publishing && tar -czf ../publishing.tar.gz *
+	@cd target/publishing && zip -q9r ../publishing.zip *
+
 
 local:
 	@cd src/common && ln -s ../publishing/docbook docbook
