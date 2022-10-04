@@ -1,2 +1,4 @@
 /src/common/docbook
+/src/common/templates
 /target
+.DS_Store
