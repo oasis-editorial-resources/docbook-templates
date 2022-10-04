@@ -4,18 +4,25 @@ default: clean authoring publishing package
 
 clean:
 	@rm -rf target
+	@test ! -e src/common/docbook || rm src/common/docbook
+	@test ! -e src/common/templates || rm src/common/templates
 
-authoring:
+target/VERSION.txt:
 	@mkdir -p target
+	@echo "Version $(VERSION) of DocBook Templates and Stylesheets for OASIS work products." > target/VERSION.txt
+	@echo "" >> target/VERSION.txt
+
+authoring: target/VERSION.txt
 	@rsync -a src/common/ target/authoring
 	@rsync -a src/authoring/ target/authoring
-	@cp LICENSE.md README.md target/authoring/
+	@cp LICENSE.md README.md target/VERSION.txt target/authoring/
+	@echo "This is the edition prepared for authoring." >> target/authoring/VERSION.txt
 
-publishing:
-	@mkdir -p target
+publishing: target/VERSION.txt
 	@rsync -a src/common/ target/publishing
 	@rsync -a src/publishing/ target/publishing
-	@cp LICENSE.md README.md target/publishing/
+	@cp LICENSE.md README.md target/VERSION.txt target/publishing/
+	@echo "This is the edition prepared for publishing." >> target/publishing/VERSION.txt
 
 package:
 	@cd target/authoring && tar -czf ../authoring-$(VERSION).tar.gz *
