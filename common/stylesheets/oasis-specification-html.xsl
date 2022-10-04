@@ -20,7 +20,7 @@
 <!-- This stylesheet is a customization of the DocBook XSL Stylesheets -->
 <!-- from http://docs.oasis-open.org/templates/ -->
 <!-- See http://sourceforge.net/projects/docbook/ -->
-<xsl:import href="../../html/docbook/xsl/html/docbook.xsl"/>
+<xsl:import href="../docbook/xsl/html/docbook.xsl"/>
 <xsl:include href="support/titlepage-html.xsl"/>
 <xsl:include href="support/oasis-mathml-html.xsl"/>
 

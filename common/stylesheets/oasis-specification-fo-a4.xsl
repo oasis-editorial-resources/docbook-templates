@@ -32,7 +32,7 @@
      Gray:   7F7F7F
   -->
 <!-- See http://sourceforge.net/projects/docbook/ -->
-<xsl:import href="../../print/docbook/xsl/fo/docbook.xsl"/>
+<xsl:import href="../docbook/xsl/fo/docbook.xsl"/>
 <xsl:include href="support/titlepage-fo.xsl"/>
 <xsl:include href="support/oasis-mathml-fo.xsl"/>
 

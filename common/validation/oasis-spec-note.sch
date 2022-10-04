@@ -4,10 +4,69 @@
   using the DocBook article document type.  This is expressed suitably
   for the oXygen XML to implement Schematron quick fixes.
   
-  Issues of writing style and appearance are found in the 
-  oasis-spec-note-style.sch constraints.
+  Note that all of these rules are ignored for any element that has the
+  attribute conformance="skip" specified. This means that if you have
+  violated any of the rules below, but still you need the document to pass
+  validation, that elment must include conformance="skip" to ignore the
+  rule check.
+  
+  - no hanging paragraphs
+    - OASIS and ISO styles prohibit a <section> element to have a mixture
+      of child <section> elements and child non-<section> content elements
+      (such as paragraphs, tables, figures, etc.)
+     
+  - no empty paragraph or leading white-space in a paragraph
+    - an empty paragraph is indicative of an editing oversight and should
+      not be used for spacing
+    - leading white space in a paragraph also is indicative of an editing
+      oversight (including a paragraph with start and end tags on two lines)
+      
+  - all links into the OASIS web site for documents newer than November 2018
+    must use https:// and not http://
+    
+  - a mismatched ulink, that is where the link's uri= is different than the
+    clickable text, is assumed to in error
+    
+  - BOM characters found in text are assumed to be in error (this also is a
+    consequence of pasting text from VirtualBox Windows Guest to a Mac host)
 
-  $Id: oasis-spec-note.sch,v 1.22 2019/07/07 15:47:35 admin Exp $
+  - bibliographic definitions must be referenced from somewhere in the content
+  
+  - for publications that also are destined for ISO Directives Part 2
+    rendering, the following roles are required to be specified for
+    <releaseinfo> elements under <articleinfo> thus if any are specified then
+    all must be specified: 'doc-sdo', 'doc-proj-id', 'doc-language',
+    'doc-release-version', 'std-originator', 'std-doc-type', 'std-doc-number',
+    'std-edition', 'std-version', 'std-ref-dated', 'std-ref-undated',
+    'doc-ref', 'release-date', 'comm-ref', 'secretariat', and 'page-count'
+
+  - <varlistentry> terms have either no role or one of the roles needed for
+    an ISO publication
+  
+  - the ISO XML translated from DocBook is more constrained than DocBook so
+    these rules prohibit nesting <literal> and <emphasis> in <ulink>
+    
+  - various DocBook allowed structures are prohibited for semantic reasons,
+    in particular, some block-level structures are not allowed in paragraphs
+
+  Three sets of rules are selectively engaged by the author, placing into
+  the <article conformance=""> attribute the feature keyword:
+  
+  - "ids" - the id= attribute of sections, appendices, tables, and figures
+            must match the compressed upper-case title prefixed by the
+            first letter of the construct. For example:
+            
+              <section id="S-THIS-IS-THE-TITLE">
+                <title>This is the title</title>
+                ...
+                
+  - "quotes" - paragraph text must not include ASCII quote or ASCII apostrophe
+               that must be replaced with the appropriate use of the Unicode
+               prose quotes and apostrophe
+               
+  - "eBuzzwords" - paragraph text must not include a swquence of characters
+                   beginning with lower case "e" followed by an upper case
+                   letter
 -->
 <schema xmlns="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt2"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xsl:version="2.0"
@@ -40,7 +99,7 @@
     </rule>
   </pattern>
   
-  <!--any leading white-space?-->
+  <!--no empty paragraph or leading white-space in a paragraph-->
   <pattern>
     <rule context="para">
       <report test="matches(node()[1]/self::text(),'^\s') and
@@ -368,6 +427,8 @@
                           ' /=','--'),'[^-A-Z\d.]',''))"
               sqf:fix="fixIdentifier"
         >The id= identifier must match the title.</report>
+      <!--due to an oXygen bug for abstract rules, this Quick Fix is
+          moved to the bottom of the file
       <sqf:fix id="fixIdentifier">
         <let name="id" value="@id"/>
         <let name="refs" value="count(//@linkend[.=$id])"/>
@@ -377,9 +438,12 @@
         </sqf:description>
         <sqf:add node-type="attribute" target="id"
                  select="concat(upper-case(substring(name(.),1,1)),'-',
-              replace(translate(upper-case(normalize-space(title)),' /=','--'),
+              replace(translate(upper-case(normalize-space(title)),' /=','-
+              *******FIX-ME-BY-DELETING-TO-LEAVE-TWO-DASHES-TOGETHER********
+              -'),
                       '[^-A-Z\d.]',''))"/>
       </sqf:fix>
+      -->
     </rule>
     <rule context="section[not(@conformance='skip')][$ids]|
                    appendix[not(@conformance='skip')][$ids]|
@@ -388,6 +452,20 @@
       <extends rule="sectionIdentifier"/>
     </rule>
   </pattern>
+  <sqf:fixes>
+    <sqf:fix id="fixIdentifier">
+      <let name="id" value="@id"/>
+      <let name="refs" value="count(//@linkend[.=$id])"/>
+      <sqf:description>
+        <sqf:title>Change the identifier to match the title
+        (refs: <xsl:value-of select="$refs"/>)</sqf:title>
+      </sqf:description>
+      <sqf:add node-type="attribute" target="id"
+               select="concat(upper-case(substring(name(.),1,1)),'-',
+            replace(translate(upper-case(normalize-space(title)),' /=','--'),
+                    '[^-A-Z\d.]',''))"/>
+    </sqf:fix>
+  </sqf:fixes>
   
   <let name="quotes" 
        value="some $token in tokenize(/*/@conformance,'\s+')
@@ -491,5 +569,5 @@
       </sqf:fix>
     </rule>
   </pattern>
-
+  
 </schema>
