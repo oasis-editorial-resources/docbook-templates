@@ -1,0 +1,83 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - '*'
+  release:
+    types:
+      - released
+  workflow_dispatch:
+
+jobs:
+  compile:
+    name: Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Prepare version labels
+        uses: k15g/action-version-labels@v1
+        with:
+          prefix: project
+
+      - name: Build authoring folder
+        run: make authoring
+
+      - name: Build publishing folder
+        run: make publishing
+
+      - name: Package folders
+        run: make package
+
+      - name: Upload bundle (artifact)
+        uses: actions/upload-artifact@v2
+        with:
+          path: target/*.tar.gz
+          name: oasis-docbook-templates-${{ env.PROJECT_VERSION }}
+          retention-days: 3
+
+      - name: Upload bundle (artifact)
+        uses: actions/upload-artifact@v2
+        with:
+          path: target/*.zip
+          name: oasis-docbook-templates-${{ env.PROJECT_VERSION }}
+          retention-days: 3
+
+      - name: Upload authoring.tar.gz
+        uses: k15g/action-github-asset-upload@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          file: target/authoring-${{ env.PROJECT_VERSION }}.tar.gz
+          name: oasis-docbook-resources-authoring-${{ env.PROJECT_VERSION }}.tar.gz
+          label: Authoring resources (tar.gz)
+
+      - name: Upload authoring.zip
+        uses: k15g/action-github-asset-upload@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          file: target/authoring-${{ env.PROJECT_VERSION }}.zip
+          name: oasis-docbook-resources-authoring-${{ env.PROJECT_VERSION }}.zip
+          label: Authoring resources (zip)
+
+      - name: Upload publishing.tar.gz
+        uses: k15g/action-github-asset-upload@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          file: target/publishing-${{ env.PROJECT_VERSION }}.tar.gz
+          name: oasis-docbook-resources-publishing-${{ env.PROJECT_VERSION }}.tar.gz
+          label: Publishing resources (tar.gz)
+
+      - name: Upload publishing.zip
+        uses: k15g/action-github-asset-upload@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          file: target/publishing-${{ env.PROJECT_VERSION }}.zip
+          name: oasis-docbook-resources-publishing-${{ env.PROJECT_VERSION }}.zip
+          label: Publishing resources (zip)
