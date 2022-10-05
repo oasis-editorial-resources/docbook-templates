@@ -52,8 +52,8 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           file: target/authoring-${{ env.PROJECT_VERSION }}.tar.gz
-          name: oasis-docbook-templates-authoring-${{ env.PROJECT_VERSION }}.tar.gz
-          label: Authoring templates (tar.gz)
+          name: oasis-docbook-resources-authoring-${{ env.PROJECT_VERSION }}.tar.gz
+          label: Authoring resources (tar.gz)
 
       - name: Upload authoring.zip
         uses: k15g/action-github-asset-upload@v1
@@ -61,8 +61,8 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           file: target/authoring-${{ env.PROJECT_VERSION }}.zip
-          name: oasis-docbook-templates-authoring-${{ env.PROJECT_VERSION }}.zip
-          label: Authoring templates (zip)
+          name: oasis-docbook-resources-authoring-${{ env.PROJECT_VERSION }}.zip
+          label: Authoring resources (zip)
 
       - name: Upload publishing.tar.gz
         uses: k15g/action-github-asset-upload@v1
@@ -70,8 +70,8 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           file: target/publishing-${{ env.PROJECT_VERSION }}.tar.gz
-          name: oasis-docbook-templates-publishing-${{ env.PROJECT_VERSION }}.tar.gz
-          label: Publishing templates (tar.gz)
+          name: oasis-docbook-resources-publishing-${{ env.PROJECT_VERSION }}.tar.gz
+          label: Publishing resources (tar.gz)
 
       - name: Upload publishing.zip
         uses: k15g/action-github-asset-upload@v1
@@ -79,5 +79,5 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           file: target/publishing-${{ env.PROJECT_VERSION }}.zip
-          name: oasis-docbook-templates-publishing-${{ env.PROJECT_VERSION }}.zip
-          label: Publishing templates (zip)
+          name: oasis-docbook-resources-publishing-${{ env.PROJECT_VERSION }}.zip
+          label: Publishing resources (zip)
