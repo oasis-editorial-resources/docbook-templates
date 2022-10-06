@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl"
-href="../2018/stylesheets/oasis-note-html.xsl"?>
+href="../stylesheets/oasis-note-html.xsl"?>
 <!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
                          "../models/docbook/docbookx.dtd"
 [
