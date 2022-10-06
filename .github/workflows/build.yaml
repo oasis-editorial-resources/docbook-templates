@@ -64,6 +64,24 @@ jobs:
           name: oasis-docbook-resources-authoring-${{ env.PROJECT_VERSION }}.zip
           label: Authoring resources (zip)
 
+      - name: Upload viewing.tar.gz
+        uses: k15g/action-github-asset-upload@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          file: target/viewing-${{ env.PROJECT_VERSION }}.tar.gz
+          name: oasis-docbook-resources-viewing-${{ env.PROJECT_VERSION }}.tar.gz
+          label: Viewing resources (tar.gz)
+
+      - name: Upload viewing.zip
+        uses: k15g/action-github-asset-upload@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          file: target/viewing-${{ env.PROJECT_VERSION }}.zip
+          name: oasis-docbook-resources-viewing-${{ env.PROJECT_VERSION }}.zip
+          label: Viewing resources (zip)
+
       - name: Upload publishing.tar.gz
         uses: k15g/action-github-asset-upload@v1
         if: startsWith(github.ref, 'refs/tags/')
