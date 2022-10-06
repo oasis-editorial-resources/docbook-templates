@@ -17,14 +17,14 @@ authoring: target/VERSION.txt
 	@rsync -a src/authoring/ target/authoring
 	@cp LICENSE.md README.md target/VERSION.txt target/authoring/
 	@echo "This is the edition prepared for authoring." >> target/authoring/VERSION.txt
-	@cp target/authoring/VERSION.txt target/authoring/VERSION-$(VERSION).txt
+	@cp target/authoring/VERSION.txt target/authoring/VERSION-authoring-$(VERSION).txt
 
 publishing: target/VERSION.txt
 	@rsync -a src/common/ target/publishing
 	@rsync -a src/publishing/ target/publishing
 	@cp LICENSE.md README.md target/VERSION.txt target/publishing/
 	@echo "This is the edition prepared for publishing." >> target/publishing/VERSION.txt
-	@cp target/publishing/VERSION.txt target/publishing/VERSION-$(VERSION).txt
+	@cp target/publishing/VERSION.txt target/publishing/VERSION-publishing-$(VERSION).txt
 
 package:
 	@cd target/authoring && tar -czf ../authoring-$(VERSION).tar.gz *
