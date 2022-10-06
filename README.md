@@ -1,4 +1,4 @@
-# DocBook Templates and Stylesheets
+# DocBook Templates and Stylesheets for OASIS committee documents
 
 This repository manages stylesheets and document models for producing OASIS work products from DocBook XML source files.
 
@@ -14,33 +14,39 @@ This environment is used to produce HTML deliverables and, with access to approp
 
 In the set of repository releases you will find `v2018.xxxx` and `v2020.xxxx` releases, reflecting the OASIS style guidelines in effect in the years indicated. Each release has three packages of resources. Each package is available in both `tar.gz` and `zip` formats.
 
-Viewing resources in `oasis-docbook-resources-viewing-*.zip` include only those directories needed in a subdirectory in the committee document distribution subdirectory in order to support the dynamic HTML rendering of the specification XML by end users. There are no constraints on the name of the subdirectory used in the committee distribution.
+There are no constraints on the name of the support subdirectory used for these packages relative to the XML. For the purposes of this documentation, the example support subdirectory is "`db/`" where the appropriate package is unzipped as subdirectories. This same convention must be used at authoring time and distribution time such that the authoring or viewing package is unzipped in a subdirectory with the same name. It is not necessary to use the convention for the unzipped publishing package as the invocation command-line arguments override the references found in the XML file with an appropriate catalogue file keyed using the PUBLIC identifier.
 
-The following directories are included in the downloaded viewing package:
+The viewing resources in `oasis-docbook-resources-viewing-*.zip` include only those directories needed as subdirectories in the support subdirectory of the committee distribution in order to support the dynamic HTML rendering of the specification XML by end users.
+
+The following directories are included in the viewing package:
 - `css/` - HTML rendering support styles
 - `docbook/` - off-the-shelf DocBook stylesheets (HTML subset only)
 - `models/` - DocBook document constraints to ensure proper structure creation of the XML 
 - `stylesheets/` - OASIS look-and-feel modifications to the DocBook stylesheets
 
-Publishing resources in `oasis-docbook-resources-publishing-*.zip` include the DocBook document models and stylesheets for OASIS and DocBook PDF and HTML renderings of the static PDF and HTML files end-users find in the distribution. This package is of interest only to those authors not using the [RealtaOnline publishing API](https://realta.atlassian.net/wiki/spaces/CustandPub/pages/372047860/OASIS+and+DocBook+publishing) online PDF/HTML formatting tools made available to OASIS technical committees to create the static PDF and HTML distribution files remotely. _Please contact gkholman@CraneSoftwrights.com regarding access to online PDF/HTML formatting tools that are available at no charge to OASIS committee document editors._ A brief review of the [Apache FOP project](https://xmlgraphics.apache.org/fop/) appears to indicate that the tool renders an acceptable PDF result for offline creation of simple use of DocBook.
+The publishing resources in `oasis-docbook-resources-publishing-*.zip` include the DocBook document models and stylesheets for OASIS and DocBook PDF and HTML renderings of the static PDF and HTML files end-users find in the distribution. This package is of interest only to those authors not using the [RealtaOnline publishing API](https://realta.atlassian.net/wiki/spaces/CustandPub/pages/372047860/OASIS+and+DocBook+publishing) online PDF/HTML formatting tools made available to OASIS technical committees to create the static PDF and HTML distribution files remotely. _Please contact gkholman@CraneSoftwrights.com regarding access to online PDF/HTML formatting tools that are available at no charge to OASIS committee document editors._ A brief review of the [Apache FOP project](https://xmlgraphics.apache.org/fop/) appears to indicate that the tool renders an acceptable PDF result for offline creation of simple use of DocBook.
 
-Authoring resources in `oasis-docbook-resources-authoring-*.zip` include the sample templates and DocBook document models and stylesheets for OASIS and DocBook HTML renderings. These are the resources an editor can use to initiate and then preview their work-in-progress on their committee document.
+The authoring resources in `oasis-docbook-resources-authoring-*.zip` include the sample templates and DocBook document models and stylesheets for OASIS and DocBook HTML renderings. These are the resources an editor can use to initiate and then preview their work-in-progress on their committee document.
 
-The following directories are included in the downloaded authoring package in addition to those in the viewing package:
+The following directories are included in the authoring package in addition to those in the viewing package:
 - `documentation/` - guidance in the use of DocBook (can be removed for distribution)
 - `templates/` - starter DocBook XML templates for authoring new OASIS documents (can be removed for distribution)
 - `validation/` - for active two-pass validation of a committee document against both DocBook model constraints and document-writing rule constraints 
 
 ## Editing the XML committee document
 
-The suggestions in this section assume that the committee deliverable subdirectory relative to the XML document being edited and distributed is "`db/`" where the viewing package is unzipped. This same convention must be used at authoring time such that the authoring package is unzipped in a directory with the same name. It is not necessary to use the convention for the unzipped publishing package as the invocation command-line arguments override the references found in the XML file with an appropriate catalogue file keyed using the PUBLIC identifier.
-
 Begin the XML document with a processing instruction used to invoke the stylesheet when browsing the XML: 
 - for an OASIS Committee Note:
-<pre>&lt;?xml-stylesheet type="text/xsl" href="db/stylesheets/oasis-note-html.xsl"?></pre>
+<pre>&lt;?xml-stylesheet type="text/xsl"
+                 href="db/stylesheets/oasis-note-html.xsl"?></pre>
 
 - for an OASIS Standard:
-<pre>&lt;?xml-stylesheet type="text/xsl" href="db/stylesheets/oasis-specification-html.xsl"?></pre>
+<pre>&lt;?xml-stylesheet type="text/xsl"
+                 href="db/stylesheets/oasis-specification-html.xsl"?></pre>
+
+The XML document must inform the stylesheets of where the stylesheets are relative to the XML document.
+
+<pre>&lt;?oasis-spec-base-uri db/?></pre>
 
 The Document Type Declaration is used to resolve entities and validate the content (the internal declaration subset can be omitted when not using MathML):
 
