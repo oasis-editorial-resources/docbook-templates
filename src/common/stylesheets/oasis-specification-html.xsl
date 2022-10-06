@@ -4,10 +4,6 @@
   <!ENTITY upper 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'>
   <!ENTITY lower 'abcdefghijklmnopqrstuvwxyz'>
   <!ENTITY separator " ">
-  <!ENTITY logo     SYSTEM '../OASISLogo.png' NDATA dummy>
-  <!ENTITY css-uri            'css/'>   
-  <!ENTITY css      SYSTEM '../css/' NDATA dummy>
-  <!NOTATION dummy  SYSTEM "">
 ]>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:saxon="http://icl.com/saxon"
@@ -27,17 +23,14 @@
 <!-- ============================================================ -->
 <!-- Parameters -->
 
-<xsl:param name="css.path">
-  <xsl:for-each select="document('')">
-    <xsl:value-of select="unparsed-entity-uri('css')"/>
-  </xsl:for-each>
-</xsl:param>
+<xsl:variable name="oasis-spec-base-uri"
+              select="/processing-instruction('oasis-spec-base-uri')"/>
 
-<xsl:param name="oasis.logo">
-  <xsl:for-each select="document('')">
-    <xsl:value-of select="unparsed-entity-uri('logo')"/>
-  </xsl:for-each>
-</xsl:param>
+<xsl:param name="css.path"
+           select="concat($oasis-spec-base-uri,'css/')"/>
+
+<xsl:param name="oasis.logo"
+           select="concat($oasis-spec-base-uri,'OASISLogo.png')"/>
   
 <xsl:param name="oasis-base" select="'no'"/>
 

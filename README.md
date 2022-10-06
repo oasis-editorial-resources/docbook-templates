@@ -1,6 +1,6 @@
 # DocBook Templates and Stylesheets for OASIS committee documents
 
-This repository manages stylesheets and document models for producing OASIS work products from DocBook XML source files.
+This repository manages version 4.5 of the DocBook document models and version 1.69.1 of the DocBook stylesheets for producing OASIS work products from XML source files.  
 
 Advantages of working with XML for committee documents include:
 - the enforcement of structured content ensuring consistent results and hands-off publishing,
@@ -74,6 +74,8 @@ Validating your document before submitting it for publishing can save some time 
 ## Maintainer
 
 This repository is maintained by Erlend Klakegg Bergheim (user: klakegg).
+
+See `Makefile` for details on creating symbolic links for your development environment, making a local copy of the target files, and cleaning up any local copy of the testing target files.
 
 ## Contributions
 
